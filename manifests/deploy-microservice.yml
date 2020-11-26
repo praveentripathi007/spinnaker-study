@@ -2,26 +2,26 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
     labels:
-        app: randomgenerator-microservice
+        app: random-generator-microservice
         stack: frontend
         source: demo
-    name: randomgenerator-microservice
+    name: random-generator-microservice
     namespace: microservices
 spec:
     replicas: 3
     selector:
         matchLabels:
-            run: randomgenerator-microservice
+            run: random-generator-microservice
     template:
         metadata:
             labels:
-                app: randomgenerator-microservice
-                run: randomgenerator-microservice
+                app: random-generator-microservice
+                run: random-generator-microservice
                 source: demo
         spec:
             containers:
-                -   image: 702037529261.dkr.ecr.us-west-2.amazonaws.com/randomgenerator-microservice
-                    name: randomgenerator-microservice
+                -   image: 702037529261.dkr.ecr.us-west-2.amazonaws.com/random-generator-microservice
+                    name: random-generator-microservice
                     ports:
                         -   name: web
                             containerPort: 8080
@@ -31,13 +31,13 @@ kind: Service
 apiVersion: v1
 metadata:
     labels:
-        app: randomgenerator-microservice-service
-    name: randomgenerator-microservice-service
+        app: random-generator-microservice-service
+    name: random-generator-microservice-service
     namespace: microservices
 spec:
     selector:
         source: demo
-        app: randomgenerator-microservice
+        app: random-generator-microservice
     ports:
         -   name: web
             protocol: TCP
@@ -51,13 +51,13 @@ kind: Ingress
 metadata:
     annotations:
         nginx.ingress.kubernetes.io/rewrite-target: /$2
-    name: randomgenerator-ingress
+    name: random-generator-ingress
     namespace: microservices
 spec:
     rules:
         -   http:
                 paths:
-                    -   path: /randomgenerator(/|$)(.*)
+                    -   path: /random-generator(/|$)(.*)
                         backend:
-                            serviceName: randomgenerator-microservice-service
+                            serviceName: random-generator-microservice-service
                             servicePort: 30201
