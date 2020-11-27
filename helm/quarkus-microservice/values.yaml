@@ -5,7 +5,7 @@
 releaseType: stable
 image: quarkus-microservice
 ecr: 702037529261.dkr.ecr.us-west-2.amazonaws.com
-#replicaCount: 1
+replicaCount: 3
 #
 #image:
 #  repository: nginx
